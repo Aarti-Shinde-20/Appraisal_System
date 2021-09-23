@@ -1,6 +1,7 @@
 package com.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.model.Employee;
 
@@ -15,4 +16,5 @@ public interface EmpDao {
 
 	public Employee getEmpById(int id);
 
+	 
 }

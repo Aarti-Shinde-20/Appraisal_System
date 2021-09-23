@@ -1,5 +1,7 @@
 package com.model;
 
+import java.util.List;
+
 public class Appraisal {
 	private int appraisalId;
 	private int empid;
@@ -51,5 +53,9 @@ public class Appraisal {
 	public String toString() {
 		return "Appraisal [appraisalId=" + appraisalId + ", empid=" + empid + ", appraisalDate=" + appraisalDate
 				+ ", currentRole=" + currentRole + ", newRole=" + newRole + "]";
+	}
+	public List<Appraisal> getALLAppraisal() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

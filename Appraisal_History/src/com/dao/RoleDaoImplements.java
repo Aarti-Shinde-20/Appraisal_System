@@ -13,7 +13,7 @@ public class RoleDaoImplements implements RoleDao {
 
 	public boolean addRole(Role r) {
 		try (Connection connection = DBConnect.getConnection();
-			PreparedStatement pst = connection.prepareStatement("insert into role values(?,?)")) {
+				PreparedStatement pst = connection.prepareStatement("insert into role values(?,?)")) {
 			pst.setInt(1, r.getRoleid());
 			pst.setString(2, r.getRolename());
 			pst.executeUpdate();
@@ -51,22 +51,22 @@ public class RoleDaoImplements implements RoleDao {
 	}
 
 	public List<Role> getAllRoles() {
+		ArrayList<Role> roleList = new ArrayList<>();
+
 		try (Connection connection = DBConnect.getConnection();
-			PreparedStatement pst = connection.prepareStatement("select * from role")) {
-			ArrayList<Role> roleList = new ArrayList<>();
+				PreparedStatement pst = connection.prepareStatement("select * from role")) {
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				Role role = new Role();
 				role.setRoleid(rs.getInt(1));
 				role.setRolename(rs.getString(2));
 				roleList.add(role);
-				 
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		List<Role> roleList = getAllRoles();
 		return roleList;
 	}
 }

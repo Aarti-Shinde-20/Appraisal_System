@@ -10,18 +10,19 @@ import java.util.ArrayList;
 import com.configuration.DBConnect;
 import com.model.Appraisal;
 import com.model.Role;
+import com.mysql.cj.x.protobuf.MysqlxPrepare.Execute;
  
 public class AppraisalDaoImplement implements AppraisalDao {
 
  	public boolean addAppraisal(Appraisal a) {
 		try (Connection connection = DBConnect.getConnection();
-				PreparedStatement pst = connection.prepareStatement("insert into appraisal values(?,?)")) {
-			pst.setInt(1, a.getAppraisalId());
-			pst.setInt(1, a.getEmpid());
+				PreparedStatement pst = connection.prepareStatement("insert into appraisal values(?,?,?,?,?)")) {
+ 			pst.setInt(1, a.getEmpid());
 			pst.setString(2, a.getAppraisalDate());
 			pst.setString(3, a.getCurrentRole());
 			pst.setString(4, a.getNewRole());
- 
+			pst.setInt(5, a.getAppraisalId());
+            pst.execute();
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -51,6 +52,36 @@ public List<Appraisal> getAllappraisal () {
 	}
 return appraisalList;
 	}
+@Override
+public List<Appraisal> getALLAppraisal() {
+	
+	// TODO Auto-generated method stub
+
+	try(Connection con=DBConnect.getConnection();
+			PreparedStatement pst=con.prepareStatement("select *  from appraisal"))
+			{
+		      ArrayList<Appraisal> Applist =new ArrayList<Appraisal>();
+		      ResultSet  rs = pst.executeQuery();
+		      while(rs.next())
+		      {
+		    	  Appraisal r =new Appraisal();
+				 r.setEmpid(rs.getInt(1));
+		    	 r.setAppraisalDate(rs.getString(2));
+		    	 r.setCurrentRole(rs.getString(3));
+		    	 r.setNewRole(rs.getString(4));
+		    	 r.setAppraisalId(rs.getInt(5));
+		    	 Applist.add(r);			      }
+		      return Applist;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	return null;
+	 
+	 
+}
+
+}
  
               
-}
+
