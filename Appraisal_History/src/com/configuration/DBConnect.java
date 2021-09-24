@@ -11,7 +11,7 @@ public class DBConnect {
 
 	public static Connection getConnection() {
 		Connection connection = null;
-		try {
+ 		try {
 
 			connection = DriverManager.getConnection(url, username, password);
 		} catch (SQLException e) {

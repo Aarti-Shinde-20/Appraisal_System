@@ -24,7 +24,7 @@ public class AppraisalMain {
 		do {
 			System.out.println("**************Welcome in Appraisal System************** !!!");
 			System.out.println(
-					"1.Add \n2.Update \n3.Delete \n4.Add Appraisal Information \n5.View all roles \n6.view Appraisal Details \n7.Add employee details \n8.view employee details \n9. List of employees \n10 Employees list of Employees who did not have appraisal     \n11.  list of Employee with maximum appraisals  \n12.Exit");
+					"1.Add \n2.Update \n3.Delete \n4.Add Appraisal Information \n5.View all roles \n6.view Appraisal Details \n7.Add employee details \n8.view employee details \n9. List of employees \n10.Employees list of Employees who did not have appraisal     \n11.List of Employee with maximum appraisals  \n12.Exit");
 			System.out.println("Enter your choice:-");
 			int choice = scanner.nextInt();
 
@@ -75,7 +75,7 @@ public class AppraisalMain {
 				System.out.println("Enter Appraisal Date :-");
 				String appraisaldate = scanner.next();
 				System.out.println("Enter Employee Current role :-");
-				String currentRole = scanner.next();
+        		String currentRole = scanner.next();
 				System.out.println("Enter Employee New role :-");
 				String newRole = scanner.next();
 				System.out.println("Enter Appraisal id :-");
@@ -114,14 +114,15 @@ public class AppraisalMain {
 			case 6:
 				List<Appraisal> list1 = appraisalDao.getALLAppraisal();
 				System.out.println("view Appraisal Details");
-				System.out.println("Empid" + "\tSalarydate" + "\tCurrent_Role" + "\tNew_Role");
+				System.out.println("-----------------------------------------------------------------");
+                System.out.println("Empid" + "\tSalarydate" + "\tCurrent_Role" + "\tNew_Role");
 				for (Appraisal rr : list1) {
 
 					System.out.println(rr.getEmpid() + "\t " + rr.getAppraisalDate() + " \t" + rr.getCurrentRole()
 							+ " \t" + rr.getNewRole());
 
 				}
-				System.out.println("------------------------------------------------------------------------------");
+				System.out.println("----------------------------------------------------------------------");
 				break;
 
 			case 7:
@@ -152,16 +153,21 @@ public class AppraisalMain {
 
 			case 8:
 				System.out.println("view  employee details ");
-				List<Employee> list2 = empDao.getAllEmployee();
-				System.out.println("empid " + "\tempname " + "\taddress" + "\t\tmobile_no" + "\tRoleId " + "\tDepId"
-						+ "\tSalary ");
-				for (Employee abc : list2) {
-					System.out.println(abc.getEmpid() + "\t" + abc.getEmpname() + "\t " + abc.getAddress() + " \t"
-							+ abc.getMobile() + " \t" + abc.getRoleid() + " \t" + abc.getDepid() + " \t"
-							+ abc.getSalary());
+				List<Employee> list = empDao.getAllEmployee();
+//				System.out.println("empid" + "\tempname " + "\t\t\taddress" + "\t\tmobile_no" + "\t\tRoleId " + "\t\tDepId"
+//						+ "\t\t\tSalary ");
+				System.out.printf("%-5s %-10s %-10s %-10s %-10s %-10s %-10s\n","empid","empname" , "address" , "mobile_no" , "RoleId " , "DepId","Salary" );
+                for (Employee abc : list) {
+//					System.out.println(abc.getEmpid() + "\t" + abc.getEmpname() + "\t\t\t" + abc.getAddress() + " \t\t"
+//							+ abc.getMobile() + " \t\t" + abc.getRoleid() + "\t\t" + abc.getDepid() +  " \t\t\t"
+//							+ abc.getSalary());
+					System.out.printf("%-5s %-10s %-10s %-10s %-10s %-10s %-10s\n", abc.getEmpid(),abc.getEmpname(), abc.getAddress(),abc.getMobile(),abc.getRoleid(),abc.getDepid(),abc.getSalary());
+
 				}
 				System.out.println("-----------------------------------------------------");
+			
 				break;
+			
 			}
 
 			if (choice == 12)

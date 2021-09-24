@@ -23,8 +23,8 @@ public class EmpDaoImplement implements EmpDao {
 			pst.setString(2, employee.getEmpname());
 			pst.setString(3, employee.getAddress());
 			pst.setLong(4, employee.getMobile());
-			pst.setInt(5, employee.getDepid());
-			pst.setInt(6, employee.getRoleid());
+			pst.setInt(5, employee.getRoleid());
+			pst.setInt(6, employee.getDepid());
 			pst.setInt(7, employee.getSalary());
 			pst.executeUpdate();
 			return true;
@@ -76,12 +76,13 @@ public class EmpDaoImplement implements EmpDao {
 				emp.setSalary(resultset.getInt(7));
 				employee.add(emp);
 			}
+			return employee;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		List<Employee> employee = null;
-		return employee;
+		//List<Employee> employee = null;
+		return null;
 	}
 
 	public boolean UpdateEmployee(Employee employee) {
@@ -118,12 +119,14 @@ public class EmpDaoImplement implements EmpDao {
 				emp.setDepid(resultset.getInt(6));
 				emp.setSalary(resultset.getInt(7));
 				employee.add(emp);
+				return employee;
+
 			}
-			return employee;
-		} catch (SQLException e) {
+ 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return getAllEmployee();
+		
 
 		// List<Employee> employee = null;
 
